@@ -83,7 +83,13 @@ public class TenantManageController {
         return R.ok().put("result", result);
 
     }
-
+/** 
+ * @description: shfoahfo
+        * @param: tenantEntity
+        * @return: com.example.demo.utils.R
+        * @author Qing
+        * @date: 2021/7/10 17:47
+ */ 
     /*批量增加租户*/
     @RequestMapping(value = "/tenant/addBatch", method = RequestMethod.POST)
     @ApiOperation(value = "批量新增租户", notes = "批量新增租户", httpMethod = "POST")
