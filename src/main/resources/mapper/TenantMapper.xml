@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.TenantMapper">
+
+    <select id="queryTenantList" resultType="com.example.demo.entity.TenantEntity">
+        SELECT * FROM ptl_tenant_info;
+    </select>
+
+
+    <select id="queryTenantByMap" parameterType="java.util.Map" resultType="com.example.demo.entity.TenantEntity" >
+        select * from ptl_tenant_info t WHERE 1 = 1
+
+        <if test="tenant_id != null and tenant_id != ''">
+            and  t.tenant_id = #{tenant_id}
+        </if>
+
+        <if test="tenant_code != null and tenant_code != ''">
+            and  t.tenant_code LIKE  concat("%", #{tenant_code},"%")
+        </if>
+
+        <if test="tenant_name != null and tenant_name != ''">
+            and  t.tenant_name  LIKE  concat("%", #{tenant_name},"%")
+        </if>
+
+
+    </select>
+
+
+    <insert id="addTenant" parameterType="com.example.demo.entity.TenantEntity">
+        insert into ptl_tenant_info(tenant_id,tenant_code,tenant_name,tenant_responsibler,tenant_owner,valid_users_total,valid_start_time,valid_end_time
+        ,tenant_roles,remark,status,create_time,update_time,create_by,update_by)
+         VALUES(#{tenant_id},#{tenant_code},#{tenant_name},#{tenant_responsibler},#{tenant_owner},#{valid_users_total},#{valid_start_time},#{valid_end_time}
+         ,#{tenant_roles},#{remark},#{status},#{create_time},#{update_time},#{create_by},#{update_by});
+    </insert>
+
+    <update id="updateTenant" parameterType="com.example.demo.entity.TenantEntity">
+        update ptl_tenant_info
+        SET tenant_id=#{tenant_id},tenant_code=#{tenant_code},tenant_name=#{tenant_name}
+        WHERE tenant_id=#{tenant_id}
+    </update>
+
+    <delete id="deleteTenant" parameterType="com.example.demo.entity.TenantEntity" >
+/*Mysql中 删除表delete 加别名*/
+        delete from ptl_tenant_info
+        WHERE tenant_id=#{tenant_id}
+    </delete>
+
+    <insert id ="addBatchTenant" parameterType="java.util.List" >
+        insert into ptl_tenant_info(tenant_id, tenant_code, tenant_name,create_time)
+        VALUES
+        <foreach collection ="list" item="temp" index= "index" separator =",">
+            (
+            #{temp.tenant_id},
+            #{temp.tenant_code},
+            #{temp.tenant_name},
+            sysdate()
+            )
+        </foreach >
+    </insert >
+
+
+    <delete id="deleteBatchTenant"  parameterType="java.util.List">
+        delete from ptl_tenant_info where tenant_id in
+        <foreach collection ="list" item="temp" index= "index" separator =",">
+            #{temp.tenant_id}
+        </foreach >
+    </delete>
+</mapper>
