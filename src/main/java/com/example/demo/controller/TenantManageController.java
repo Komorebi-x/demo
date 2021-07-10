@@ -94,11 +94,11 @@ public class TenantManageController {
 
     }
 /** 
- * @description: 
+ * @description: eere
         * @param: tenant_id
         * @return: com.example.demo.utils.R
         * @author Qing
-        * @date: 2021/7/10 16:06
+        * @date: 2021/7/10 17:40
  */ 
     /*批量删除租户*/
     @RequestMapping(value = "/tenant/deleteBatch", method = RequestMethod.GET)
