@@ -22,5 +22,5 @@ public interface TenantMapper {
 
     int addBatchTenant(List<TenantEntity> list);
 
-    int deleteBatchTenant(@Param("list")List<TenantEntity> tenant_id);
+    int deleteBatchTenant(@Param("tenant_id")List<TenantEntity> tenant_id);
 }

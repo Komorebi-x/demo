@@ -83,13 +83,7 @@ public class TenantManageController {
         return R.ok().put("result", result);
 
     }
-/** 
- * @description: shfoahfo
-        * @param: tenantEntity
-        * @return: com.example.demo.utils.R
-        * @author Qing
-        * @date: 2021/7/10 17:47
- */ 
+
     /*批量增加租户*/
     @RequestMapping(value = "/tenant/addBatch", method = RequestMethod.POST)
     @ApiOperation(value = "批量新增租户", notes = "批量新增租户", httpMethod = "POST")
@@ -100,15 +94,15 @@ public class TenantManageController {
 
     }
 /** 
- * @description: eere
+ * @description:
         * @param: tenant_id
         * @return: com.example.demo.utils.R
         * @author Qing
         * @date: 2021/7/10 17:40
  */ 
     /*批量删除租户*/
-    @RequestMapping(value = "/tenant/deleteBatch", method = RequestMethod.GET)
-    @ApiOperation(value = "批量删除租户", notes = "批量删除租户", httpMethod = "GET")
+    @RequestMapping(value = "/tenant/deleteBatch", method = RequestMethod.POST)
+    @ApiOperation(value = "批量删除租户", notes = "批量删除租户", httpMethod = "POST")
     public R deleteBatchTenant(@RequestBody List<TenantEntity> tenant_id) {
 
         int result = tenantService.deleteBatchTenant(tenant_id);
